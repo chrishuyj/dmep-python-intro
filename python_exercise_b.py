@@ -20,7 +20,7 @@ print("Expected output: helium")
 # dictionary value, and the print statement below displays "helium" (instead
 # of throwing a KeyError).
 
-element_names = None
+element_names = {"He": "helium"}
 print(element_names['He'])
 
 #------------------------------------------------------------------------
@@ -32,8 +32,8 @@ print("Expected output: lithium")
 # Task 2: Modify the values of the variables "key" and "val" below so that
 # the print statement displays 'lithium'.
 
-key = "???"
-val = "???"
+key = "Li"
+val = "lithium"
 element_names[key] = val
 print(element_names['Li'])
 
@@ -46,8 +46,8 @@ print("Expected output: 19")
 # Task 3: Modifying the values of the variables "key" and "value" below
 # so that the print statement displays "19".
 
-key = "???"
-val = "???"
+key = "wine"
+val = "19"
 word_counts = {'cheese': 10, 'wine': 17, 'arachnids': 24}
 word_counts[key] = val
 print(word_counts['wine'])
@@ -63,7 +63,7 @@ print("Expected output: 4")
 # statement displays "4". Use the `.keys()` method.
 
 student_ages = {'Alfred': 17, 'Bryson': 18, 'Candace': 19, 'David': 20}
-student_names = [] # <-- change this!
+student_names = student_ages.keys() # <-- change this!
 print(len(student_names))
 
 #------------------------------------------------------------------------
@@ -78,7 +78,7 @@ print("Expected output: Pluto is not a planet.")
 planet_classifications = {'Mercury': 'terrestrial', 'Venus': 'terrestrial',
 		'Earth': 'terrestrial', 'Mars': 'terrestrial', 'Jupiter': 'gas giant',
 		'Saturn': 'gas giant', 'Uranus': 'ice giant', 'Neptune': 'ice giant'}
-planet_name = 'Neptune'
+planet_name = 'Pluto'
 if planet_name in planet_classifications:
 	print(planet_name + " is a planet.")
 else:
@@ -100,10 +100,10 @@ print("  Venus")
 # above. Use the .keys() method and the sorted() function. You're
 # checking to see which keys have the value "terrestrial".
 
-planet_list = [] # <-- change this
-for planet in planet_list:
-	# add an if statement here, and tab over the line below
-	print(planet)
+planet_list = planet_classifications.keys() # <-- change this
+for planet in sorted(planet_list):
+    if planet_classifications[planet] == "terrestrial":
+        print(planet)
 
 #------------------------------------------------------------------------
 
@@ -120,10 +120,10 @@ print("Expected output: 4")
 # displays the output "4".
 
 words = "Mother said there'd be days like these."
-word_list = [] # <-- modify this
+word_list = words.split() # <-- modify this
 word_dict = {}
 for word in word_list:
-	pass # <-- replace this
+	word_dict[word] = len(word) # <-- replace this
 print(word_dict['days'])
 
 
@@ -146,7 +146,7 @@ print("  these.: 6")
 # append the two parts of the output string for each line together.)
 
 for word in word_list:
-	pass # <-- replace this!
+	print(word, ":", str(len(word))) # <-- replace this!
 
 #------------------------------------------------------------------------
 
@@ -157,8 +157,8 @@ print("Expected output: ['foo', 'bar', 'baz']")
 # Task 9: Modify the values of the variables "key" and "val" below so that
 # the expected output is displayed.
 
-key = "???"
-val = "???"
+key = "scrumbulator"
+val = "baz"
 widget_characteristics = {'scrumbulator': ['foo', 'bar']}
 widget_characteristics[key].append(val)
 print(widget_characteristics['scrumbulator'])
@@ -183,7 +183,7 @@ planets = [
 
 demonyms = []
 for planet in planets:
-	pass # <-- replace this!
+	demonyms.append(planet['demonym']) # <-- replace this!
 print(", ".join(demonyms))
 
 #------------------------------------------------------------------------
@@ -199,7 +199,7 @@ print("Expected output: apple, banana, cupcake")
 # parameter to the set() function.)
 
 items = "apple apple banana apple cupcake banana apple cupcake"
-items_set = set() # <-- insert an expression between the parentheses
+items_set = set(items.split( )) # <-- insert an expression between the parentheses
 print(', '.join(sorted(items_set)))
 
 #------------------------------------------------------------------------
@@ -215,7 +215,7 @@ print("Expected output: aardvark, anteater, alpaca")
 # those strings in the source list that start with the letter "a".
 
 animals = ["aardvark", "camel", "anteater", "elephant", "alpaca", "jackal"]
-animals_that_start_with_a = [x for x in animals] # <-- insert membership expr
+animals_that_start_with_a = [x for x in animals if x[0] == "a"] # <-- insert membership expr
 print(', '.join(animals_that_start_with_a))
 
 #------------------------------------------------------------------------
@@ -230,7 +230,7 @@ print("Expected output: vark, amel, ater, hant, paca, ckal")
 # of each string in the source list.
 
 animals = ["aardvark", "camel", "anteater", "elephant", "alpaca", "jackal"]
-animal_parts = [x for x in animals] # <-- replace leftmost "x"
+animal_parts = [x[-4:] for x in animals] # <-- replace leftmost "x"
 print(', '.join(animal_parts))
 
 #------------------------------------------------------------------------
@@ -246,7 +246,7 @@ print("Expected output: Camel, Elephant, Jackal")
 # (Hint: use the Python string object's .title() method.)
 
 animals = ["aardvark", "camel", "anteater", "elephant", "alpaca", "jackal"]
-animal_list = [x for x in animals] # <-- replace "x" and add membership expr
+animal_list = [x.title() for x in animals if x[0] != "a"] # <-- replace "x" and add membership expr
 print(', '.join(animal_list))
 
 #------------------------------------------------------------------------
@@ -279,6 +279,6 @@ planets = [
 		{'name': 'Makemake', 'type': 'dwarf'},
 		{'name': 'Eris', 'type': 'dwarf'},
 ]
-dwarf_planet_names = ["planet name" for x in planets] # <-- make changes here!
+dwarf_planet_names = [x['name'] for x in planets if x['type'] == 'dwarf'] # <-- make changes here!
 print(", ".join(dwarf_planet_names))
 
